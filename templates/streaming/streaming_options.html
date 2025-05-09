@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Streaming Options Section -->
+<section class="streaming-options">
+    <div class="streaming-header">
+        <h1>{{ category.name }} - Opciones de Streaming</h1>
+        <p>Selecciona tu proveedor preferido para comenzar a ver</p>
+    </div>
+
+    <div class="streams-grid">
+        {% for stream in streams %}
+        <div class="stream-card">
+            <div class="stream-provider">
+                <img src="{{ stream.provider_logo.url }}" alt="{{ stream.provider_name }}">
+                <h3>{{ stream.provider_name }}</h3>
+            </div>
+            <div class="stream-details">
+                <div class="stream-quality">
+                    <span class="quality-badge">{{ stream.quality }}</span>
+                    <span class="language-badge">{{ stream.language }}</span>
+                </div>
+                <ul class="stream-info">
+                    <li><i class="fas fa-clock"></i> En vivo: {% if stream.is_live %}Sí{% else %}No{% endif %}</li>
+                    <li><i class="fas fa-chart-line"></i> Calidad: {{ stream.bitrate }} Mbps</li>
+                </ul>
+            </div>
+            <a href="{{ stream.stream_url }}" class="watch-button" target="_blank">
+                Ver ahora <i class="fas fa-play-circle"></i>
+            </a>
+        </div>
+        {% empty %}
+        <div class="no-streams">
+            <i class="fas fa-video-slash"></i>
+            <p>Actualmente no hay streams disponibles para esta categoría</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Streaming Options Styles */
+    .streaming-options {
+        padding: 4rem 5%;
+        background-color: var(--background);
+    }
+
+    .streaming-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .streaming-header h1 {
+        font-size: 2.5rem;
+        color: var(--primary);
+        margin-bottom: 1rem;
+    }
+
+    .streams-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .stream-card {
+        background: var(--secondary);
+        border-radius: 15px;
+        padding: 1.5rem;
+        position: relative;
+        transition: transform 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .stream-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .stream-provider {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .stream-provider img {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+    }
+
+    .stream-details {
+        margin-bottom: 1.5rem;
+    }
+
+    .stream-quality {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .quality-badge, .language-badge {
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    .quality-badge {
+        background: var(--primary);
+        color: white;
+    }
+
+    .language-badge {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid var(--primary);
+    }
+
+    .stream-info {
+        list-style: none;
+        padding: 0;
+    }
+
+    .stream-info li {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .watch-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        width: 100%;
+        padding: 1rem;
+        background: var(--primary);
+        color: white;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: background 0.3s ease;
+    }
+
+    .watch-button:hover {
+        background: #ff2a2a;
+    }
+
+    .no-streams {
+        text-align: center;
+        grid-column: 1 / -1;
+        padding: 3rem;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+    }
+
+    .no-streams i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: var(--primary);
+    }
+
+    @media (max-width: 768px) {
+        .streams-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}

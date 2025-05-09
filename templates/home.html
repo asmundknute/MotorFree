@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}MotorRacing Stream - Inicio{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Vive la adrenalina de los <span>deportes de motor</span></h1>
+            <p>Disfruta en directo y a la carta de las mejores competiciones de motor del mundo con la mayor calidad.</p>
+            <div class="hero-buttons">
+                <!--<a href="" class="btn-primary">Ver ahora <i class="fas fa-play-circle"></i></a>-->
+                <a href="{% url 'categories' %}" class="btn-secondary">Explorar categorías</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Live Races Section -->
+    <section class="live-races">
+        <div class="section-header">
+            <h2>En directo</h2>
+            <div class="live-now">
+                <div class="live-pulse"></div>
+                En vivo ahora
+            </div>
+        </div>
+        
+        <div class="races-container">
+            {% for live_race in live_races %}
+            <div class="race-card">
+                <div class="race-thumbnail">
+                    <img src="{{ live_race.thumbnail.url }}" alt="{{ live_race.title }}">
+                    <div class="race-live-tag">
+                        <div class="live-pulse"></div>
+                        EN VIVO
+                    </div>
+                </div>
+                <div class="race-info">
+                    <div class="race-category">{{ live_race.category.name }}</div>
+                    <h3 class="race-title">{{ live_race.title }}</h3>
+                    <div class="race-meta">
+
+                        <div>
+                            <i class="fas fa-clock"></i>
+                            {{ live_race.status }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <!-- Fallback live races if none are available in the database -->
+            <div class="race-card">
+                <div class="race-thumbnail">
+                    <img src="{% static 'images/races/f1-spain.jpg' %}" alt="F1 Gran Premio de España">
+                    <div class="race-live-tag">
+                        <div class="live-pulse"></div>
+                        EN VIVO
+                    </div>
+                </div>
+                <div class="race-info">
+                    <div class="race-category">Fórmula 1</div>
+                    <h3 class="race-title">Gran Premio de España - Carrera</h3>
+                    <div class="race-meta">
+
+                        <div>
+                            <i class="fas fa-clock"></i>
+                            Vuelta 34/66
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="race-card">
+                <div class="race-thumbnail">
+                    <img src="{% static 'images/races/motogp-italy.jpg' %}" alt="MotoGP Gran Premio de Italia">
+                    <div class="race-live-tag">
+                        <div class="live-pulse"></div>
+                        EN VIVO
+                    </div>
+                </div>
+                <div class="race-info">
+                    <div class="race-category">MotoGP</div>
+                    <h3 class="race-title">Gran Premio de Italia - Carrera</h3>
+                    <div class="race-meta">
+
+                        <div>
+                            <i class="fas fa-clock"></i>
+                            12 vueltas restantes
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="race-card">
+                <div class="race-thumbnail">
+                    <img src="{% static 'images/races/rally-portugal.jpg' %}" alt="WRC Rally de Portugal">
+                    <div class="race-live-tag">
+                        <div class="live-pulse"></div>
+                        EN VIVO
+                    </div>
+                </div>
+                <div class="race-info">
+                    <div class="race-category">Rally</div>
+                    <h3 class="race-title">WRC Rally de Portugal - Etapa 2</h3>
+                    <div class="race-meta">
+
+                        <div>
+                            <i class="fas fa-clock"></i>
+                            Tramo 7/16
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}MotorRacing Stream - Categorías{% endblock %}</title>
+</head>
+<body>
+{% block content %}
+    <!-- Hero Section -->
+    <section class="category-hero">
+        <div class="hero-content">
+            <h1>Explora todas las <span>categorías</span></h1>
+            <p>Descubre y disfruta de toda la acción de tus competiciones favoritas en un solo lugar.</p>
+        </div>
+    </section>
+    <!-- Categories Section -->
+    <section class="categories">
+        <h2 class="section-title">Categorías</h2>
+        <div class="categories-container">
+            {% for category in categories %}
+            <a href="{% url 'streaming_options' category.slug %}" class="category-card">
+                <img src="{{ category.image.url }}" alt="{{ category.name }}">
+                <div class="category-name">{{ category.name }}</div>
+            </a>
+            {% empty %}
+            <!-- Fallback categories if none are available in the database -->
+            <div class="category-card">
+                <img src="{% static 'images/categories/f1.jpg' %}" alt="Fórmula 1">
+                <div class="category-name">Fórmula 1</div>
+            </div>
+            <div class="category-card">
+                <img src="{% static 'images/categories/f2.jpg' %}" alt="Fórmula 2">
+                <div class="category-name">Fórmula 2</div>
+            </div>
+            <div class="category-card">
+                <img src="{% static 'images/categories/formula-e.jpg' %}" alt="Fórmula E">
+                <div class="category-name">Fórmula E</div>
+            </div>
+            <div class="category-card">
+                <img src="{% static 'images/categories/wec.jpg' %}" alt="WEC">
+                <div class="category-name">WEC</div>
+            </div>
+            <div class="category-card">
+                <img src="{% static 'images/categories/rally.jpg' %}" alt="Rally">
+                <div class="category-name">Rally</div>
+            </div>
+            <div class="category-card">
+                <img src="{% static 'images/categories/motogp.jpg' %}" alt="MotoGP">
+                <div class="category-name">MotoGP</div>
+            </div>
+            <div class="category-card">
+                <img src="{% static 'images/categories/indycar.jpg' %}" alt="IndyCar">
+                <div class="category-name">IndyCar</div>
+            </div>
+            <div class="category-card">
+                <img src="{% static 'images/categories/nascar.jpg' %}" alt="NASCAR">
+                <div class="category-name">NASCAR</div>
+            </div>
+            <div class="category-card">
+                <img src="{% static 'images/categories/dakar.jpg' %}" alt="Dakar">
+                <div class="category-name">Dakar</div>
+            </div>
+            <div class="category-card">
+                <img src="{% static 'images/categories/f1.jpg' %}" alt="Fórmula 1">
+                <div class="category-name">Turismo</div>
+            </div>
+            <div class="category-card">
+                <img src="{% static 'images/categories/f1.jpg' %}" alt="Fórmula 1">
+                <div class="category-name">Gran Turismo (GT)</div>
+            </div>
+            <div class="category-card">
+                <img src="{% static 'images/categories/f1.jpg' %}" alt="Fórmula 1">
+                <div class="category-name">Drifting</div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}
+</body>
+</html>

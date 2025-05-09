@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.wsgi/$1 [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+    Header set Cache-Control "max-age=31536000, public"
+</IfModule>
+
+# Permitir el acceso a archivos estáticos
+<FilesMatch "\.(css|js|png|jpg|jpeg|gif|ico|woff|woff2|ttf|svg|eot)$">
+    Header set Access-Control-Allow-Origin "*"
+</FilesMatch>

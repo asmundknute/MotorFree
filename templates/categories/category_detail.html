@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}MotorRacing Stream - {{ category.name }}{% endblock %}</title>
+
+</head>
+<body>
+
+{% block content %}
+    <!-- Category Header -->
+    <section class="category-header" style="background-image: url('{{ category.banner_image.url }}')">
+        <div class="category-header-content">
+            <h1>{{ category.name }}</h1>
+            <p>{{ category.description }}</p>
+        </div>
+    </section>
+    
+    <!-- Live Events Section -->
+    {% if live_events %}
+    <section class="live-events">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>En directo ahora</h2>
+                <div class="live-now">
+                    <div class="live-pulse"></div>
+                    En vivo
+                </div>
+            </div>
+            
+            <div class="races-container">
+                {% for event in live_events %}
+                <div class="race-card">
+                    <div class="race-thumbnail">
+                        <img src="{{ event.thumbnail.url }}" alt="{{ event.title }}">
+                        <div class="race-live-tag">
+                            <div class="live-pulse"></div>
+                            EN VIVO
+                        </div>
+                    </div>
+                    <div class="race-info">
+                        <div class="race-category">{{ category.name }}</div>
+                        <h3 class="race-title">{{ event.title }}</h3>
+                        <div class="race-meta">
+                            <div>
+                                <i class="fas fa-clock"></i>
+                                {{ event.status }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    
+    <!-- Upcoming Events Section -->
+    {% if upcoming_events %}
+    <section class="upcoming-events">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Próximos eventos</h2>
+            </div>
+            
+            <div class="events-calendar">
+                {% for event in upcoming_events %}
+                <div class="calendar-item">
+                    <div class="calendar-date">
+                        <span>{{ event.date|date:"d M, Y" }}</span>
+                        <span>{{ event.time|time:"H:i" }}</span>
+                    </div>
+                    <h3 class="calendar-title">{{ event.title }}</h3>
+                    <p class="calendar-venue">{{ event.venue }}</p>
+                    <a href="{% url 'event_detail' event.id %}" class="calendar-btn">
+                        Recordatorio <i class="far fa-bell"></i>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    
+    <!-- Past Events Section -->
+    {% if past_events %}
+    <section class="past-events">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Eventos anteriores</h2>
+                <a href="{% url 'category_archive' category.slug %}" class="view-all">Ver todos <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="video-grid">
+                {% for event in past_events %}
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="{{ event.thumbnail.url }}" alt="{{ event.title }}">
+                        <div class="video-duration">{{ event.duration }}</div>
+                        <div class="play-icon">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">{{ event.title }}</h3>
+                        <div class="video-meta">
+                            <span>{{ event.date|date:"d M, Y" }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    
+    <!-- Related Categories -->
+    <section class="related-categories">
+        <div class="section-container">
+            <h2>Categorías relacionadas</h2>
+            <div class="categories-slider">
+                {% for related in related_categories %}
+                <div class="category-slide">
+                    <img src="{{ related.image.url }}" alt="{{ related.name }}">
+                    <div class="category-slide-name">{{ related.name }}</div>
+                </div>
+                {% empty %}
+                <!-- Fallback related categories if none are in the database -->
+                {% if category.name == "Fórmula 1" %}
+                <div class="category-slide">
+                    <img src="{% static 'images/categories/f2.jpg' %}" alt="Fórmula 2">
+                    <div class="category-slide-name">Fórmula 2</div>
+                </div>
+                <div class="category-slide">
+                    <img src="{% static 'images/categories/formula-e.jpg' %}" alt="Fórmula E">
+                    <div class="category-slide-name">Fórmula E</div>
+                </div>
+                <div class="category-slide">
+                    <img src="{% static 'images/categories/indycar.jpg' %}" alt="IndyCar">
+                    <div class="category-slide-name">IndyCar</div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Simple slider for related categories
+    document.addEventListener('DOMContentLoaded', function() {
+        // You can implement a simple slider here if needed
+        console.log('Category detail page loaded');
+    });
+</script>
+{% endblock %}
+</body>
+</html>

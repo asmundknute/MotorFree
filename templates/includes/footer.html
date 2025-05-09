@@ -1,0 +1,72 @@
+{% load static %}
+<footer>
+    <div class="footer-content">
+        <div class="footer-brand">
+            <div class="footer-logo">
+                <i class="fas fa-flag-checkered"></i> Motor<span>Racing</span>
+            </div>
+            <p class="footer-desc">Tu plataforma premium para disfrutar de la mejor cobertura de deportes de motor.</p>
+            <div class="social-links">
+                <a href="#" class="social-icon">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-x-twitter"></i>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+        </div>
+        
+        <!--<div>
+            <h3 class="footer-heading">Categorías</h3>
+            <ul class="footer-links">
+                {% for category in footer_categories %}
+                    <li><a href="{% url 'category_detail' slug=category.slug %}">{{ category.name }}</a></li>
+                {% empty %}
+                    <li><a href="#">Fórmula 1</a></li>
+                    <li><a href="#">MotoGP</a></li>
+                    <li><a href="#">Rally</a></li>
+                    <li><a href="#">NASCAR</a></li>
+                    <li><a href="#">IndyCar</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div>
+            <h3 class="footer-heading">Ayuda</h3>
+            <ul class="footer-links">
+                <li><a href="">Centro de ayuda</a></li>
+                <li><a href="">Contacto</a></li>
+                <li><a href="">Preguntas frecuentes</a></li>
+                <li><a href="">Términos de servicio</a></li>
+                <li><a href="">Política de privacidad</a></li>
+            </ul>
+        </div>
+        
+        <div>
+            <h3 class="footer-heading">Cuenta</h3>
+            <ul class="footer-links">
+                {% if user.is_authenticated %}
+                    <li><a href="">Mi cuenta</a></li>
+                    <li><a href="">Planes de suscripción</a></li>
+                    <li><a href="">Mis favoritos</a></li>
+                    <li><a href="">Historial</a></li>
+                    <li><a href="">Configuración</a></li>
+                {% else %}
+                    <li><a href="">Iniciar sesión</a></li>
+                    <li><a href="">Registrarse</a></li>
+                    <li><a href="">Planes de suscripción</a></li>
+                {% endif %}
+            </ul>
+        </div>-->
+    </div>
+    
+    <div class="copyright">
+        © {% now "Y" %} MotorRacing Stream. Todos los derechos reservados.
+    </div>
+</footer>

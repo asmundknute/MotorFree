@@ -1,0 +1,16 @@
+{% load static %}
+<header>
+    <div class="nav-container">
+        <a href="{% url 'home' %}" class="logo">
+            <i class="fas fa-flag-checkered"></i>
+            Motor<span>Racing</span>
+        </a> 
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Inicio</a></li>
+                <li><a href="">En vivo</a></li>
+                <li><a href="{% url 'categories' %}">Categorías</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
